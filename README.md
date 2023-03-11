@@ -7,7 +7,7 @@ This tutorial is designed to teach beginners how to create VMs and setup a Vnet 
 
 <h2>Pre-requisites </h2>
 
-- [Setup a Subscription and a Resource in Azure for Beginner Labs](https://github.com/jacksonmalms/setup-azure-sub-and-resource)
+- [Setup a Subscription and a Resource in Azure for Beginner Labs](https://github.com/bvongpradith/setup-azure-sub-and-resource)
 
 <h2>Environments and Technologies Used</h2>
 
