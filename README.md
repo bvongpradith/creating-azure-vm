@@ -121,4 +121,10 @@ Select "Topology" on the left of the screen.
 <img src="https://i.imgur.com/yX4dsyq.png"/>
 </p>
 <p>
-Finally, you will select the resource group and Vnet that we have been using for the tutorial. In this case it will be "RG-2" and VM1-vnet. This will show the topology of the network we just created. 
+Finally, you will select the resource group and Vnet that we have been using for the tutorial. In this case it will be "RG-2" and VM1-vnet. This will show the topology of the network we just created. We can now finally either delete the resource group or keep it to use for our next tutorial.
+  
+  <p>
+<img src="https://i.imgur.com/TZXjAuP.png"/>
+</p>
+<p>
+To delete the resource group, just go back to the resource groups page, click on the resource group, click delete resource group, and type/copy paste the resource group's name to confirm, and then click delete.
