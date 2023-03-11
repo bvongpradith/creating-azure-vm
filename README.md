@@ -3,7 +3,7 @@
 </p>
 
 <h1>How to Setup VMs and a Virtual Network in Azure</h1>
-This tutorial is designed to teach beginners how to create VMs and setup a Vnet in Azure, and then observe the network topology with Network Watcher.<br />
+This is an simple online tutorial to teach beginners how to create multiple virtual machines and virtual network in Azure. After creating the virtual network, we will observe the network topology through Newtork Watcher.<br />
 
 <h2>Pre-requisites </h2>
 
@@ -18,146 +18,107 @@ This tutorial is designed to teach beginners how to create VMs and setup a Vnet 
 - Windows 10 (21H2)
 - Linux (ubuntu server 20.04)
 
-<h2>High-Level Steps</h2>
+<h2>Steps</h2>
 
-- Step 1: Create a Resource Group
-- Step 2: Create a Windows 10 VM (While creating the VM, use the same resource group, and allow it to create a new Vnet and subnet)
-- Step 3: Create a Ubuntu Server VM (While creating the VM, select the previously created resource group and Vnet)
+- Step 1: Create a new Resource Group within the Azure Portal
+- Step 2: Create a Windows 10 virtual machine
+- Step 3: Create a Ubuntu Server virtual machine
 - Step 4: Observe Your Virtual Network within Network Watcher
-- Step 5: Either clean up the resources by deleting them, or you can keep them to use in the my next tutorial/lab, the link to that will be at the end of this tutorial!
+- Step 5: Clean up the resource group
 
 
-<h2>Full Visual Walkthrough</h2>
+<h2>Virtual Machine and Network Creation</h2>
 
 <p>
-<img src="https://i.imgur.com/iEMJNac.png"/>
+<img src="https://i.imgur.com/pXKn1Uq.png"/>
 </p>
 <p>
-First, log in to your Azure portal https://portal.azure.com/ (Assuming you already have an account with a subscription, but if you don't have one yet check the pre-requisites)
+First, log into the Azure portal by typing in https://portal.azure.com/. If you do not have a account with Azure, please look at pre-requisites to create an account and get accustumed to the application.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/U00aXOd.png"/>
+<img src="https://i.imgur.com/sSUHU1L.png"/>
 </p>
 <p>
-Next, create a new resource group, I named mine "RG-LAB-02", select whatever region that is closest to you. You can find the Resource Groups page (or any page in Azure) by searching for it in the searchbar at the top. Click Review + create, and then hit create.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/z9N5Lnd.png"/>
-</p>
-<p>
-Now go to the Virtual Machines page and create a new VM. I named mine "VM1-WINDOWS10", and make sure your VM's region is set to the same as your Resource Group and at the very least that is in the same region as the next VM that we will create, double check this right before you create the VM. Select Windows 10 Pro as the image.
+Now, navigate to the Resource Group page by either typing the name in the search bar or choosing the button at the homepage of the Azure portal. Secondly, create a new resource group and name it whatever you would like. For this tutorial I will be using "RG-1". After this select the region that is closest to you, I will be using "West US 3". When finished, press "Review + create" button at the bottom left of the screen. Lastly, press create.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/7aM2MkO.png"/>
+<img src="https://i.imgur.com/CdBRuok.png"/>
 </p>
 <p>
-Now select the size and specs of the VM, I suggest selecting one with over 2GB of RAM or else it will just be way too slow (I just selected 2 CPUs and 16GB RAM). Then set the username and password, I highly suggest taking note of these. After that hit the check box under Licensing, and then hit next until you get to the networking section.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/0Ma9Zeg.png"/>
-</p>
-<p>
-Let the VM create it's own new Vnet, leave the subnet and public IP default, then click review and create.
+Create a Virtual Machine by going to the page by typing the name in the search bar or pressing the button on the homepage of the portal. Then you will press create a VM and will be redirected to the page in the photo. Double check that the subscription is set to your subscription and choose the resource group that you created. You will then name the resource group to your liking. This tutorial we will be using "VM1". After naming the virtual machine, we will select the same region that you chose for the resource group. We will use that same region throughout this lab including the next virtual machine we will create after this one. Select Windows 10 Pro as the image for this VM.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/7qRVqk8.png"/>
+<img src="https://i.imgur.com/RheRutU.png"/>
 </p>
 <p>
-After the Windows VM deployment is complete, go back to the Virtual Machine page and start creating a new VM.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/zGyrGwn.png"/>
-</p>
-<p>
-Set the resource group to the same one as the Windows VM, then name the VM, I named mine "VM2-UBUNTU". Make sure the region is set to the same as the last VM, select Ubuntu Server 20.04 LTS as your image, and use the x64 architecture.
+After that, select the vcpus and RAM size of the VM. Select the one with at least 2 vcpus and at least 3.5 GB of RAM so the virtual machine is not super slow. Now you will create a username and password which I highly recommend saving or writing down for this tutorial just in case. You will then hit the checkbox at the bottom of the screen and then press next button until you reach the networking section. 
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/KYFsdFn.png"/>
+<img src="https://i.imgur.com/iot8mYa.png"/>
 </p>
 <p>
-Now set the size of the VM, just use the same size as the previous one. Set the Authentication type to Password, then set the username and password of the VM.
-Once you've done that, hit next until you get to the networking section.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/P3rdouQ.png"/>
-</p>
-<p>
-Select the Vnet as the same one as the Windows VM, mine is "VM1-WINDOWS10-vnet". Leave everything else default, just make sure everything looks like the screenshot above. Then hit review and create.
+The VM will create its own virtual network, subnet and public IP. Leave these options alone and press "Review + Create" at the bottom. Finalize the VM by pressing create afterwards.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/cfTtFxY.png"/>
+<img src="https://i.imgur.com/PjHBWaP.png"/>
 </p>
 <p>
-Now we will try to view the network topology, to do this go to the Network Watcher page.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/2H1mHwK.png"/>
-</p>
-<p>
-Click on "Topology".
+When the VM is finished deploying, you will go back onto the VM page to create another VM.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/w1osZHS.png"/>
+<img src="https://i.imgur.com/JEdneqB.png"/>
 </p>
 <p>
-Select the resource group and Vnet that correspond to the ones we just created, and now we can see a visual representation of the network we just made!
-Now we are finished, but if you you are unable to see the topology and get a red text box instead, please proceed to the next step.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/aicFPBL.png"/>
-</p>
-<p>
-Go to the resource groups page and click on the "NetworkWatcherRG" resource group, and then click on the resource "NetworkWatcher_xyz".
+We will now set the resource group to the same one as the Windows 10 VM and make sure the subscription is the same as well. We'll name this VM2 and make sure the region is the exact same as the other VM. Instead of Windows 10, we'll select Ubuntu Server 20.04 LTS as your image and check the x64 architecture.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/vi5PTwv.png"/>
+<img src="https://i.imgur.com/54oAUBx.png"/>
 </p>
 <p>
-Hit the "move" button next to resource group.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/xLnxt4L.png"/>
-</p>
-<p>
-Select the resource group that the VMs are in, mine is "RG-LAB-02". Then hit next, it will then check to see if the resource is movable (it will be), and then wait a few minutes as it will take a while. Then get to the review section and apply the move. Again, this will take a few minutes.
-
-After that go back to the Network Watcher page and go to the Topology section and it should now show up!
-
-Congratulations, you made it to the end of this lab! Now you can either delete the resource groups to clean up as listed in the next step, or keep the resources to proceed to the next lab/tutorial where we observe network traffic between the two VMs using Wireshark.
-- [Network Security Groups (NSGs) and Inspecting Traffic Between Azure Virtual Machines](https://github.com/jacksonmalms/azure-network-protocols)
+Set the size as the same as the first VM we created. Choose password for authentication type and create your username and password. For simplicity of this tutorial, we'll use the same one as the first VM. Finally, hit next button until you arrive at the networking section.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/ZttsXKR.png"/>
+<img src="https://i.imgur.com/5uxTLhS.png"/>
 </p>
 <p>
-To delete the resource group, just go back to the resource groups page, click on the resource group, click delete resource group, and type/copy paste the resource group's name to confirm, and then click delete.
+Select the asame Vnet that the Windows VM created. This should be deafult, but if it is different make sure to change it. Afterwards, just make sure everything is default as well and then hit the "Review + Create" button. Lastly, finish off this VM by pressing "Create".
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/eP4NtcA.png"/>
+</p>
+<p>
+To view the network topology, we'll type in "Network Watcher" in the searchbar and selet it.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/Nw6E1xs.png"/>
+</p>
+<p>
+Select "Topology" on the left of the screen.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/yX4dsyq.png"/>
+</p>
+<p>
+Finally, you will select the resource group and Vnet that we have been using for the tutorial. In this case it will be "RG-2" and VM1-vnet. This will show the topology of the network we just created. 
